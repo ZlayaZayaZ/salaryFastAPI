@@ -13,12 +13,12 @@ class EmployeeDAO (BaseDAO):
     @classmethod
     async def find_full_data(cls, employee_id: int):
         async with async_session_maker() as session:
-            # Первый запрос для получения информации о студенте
+            # Запрос для получения информации о работнике
             query_employee = select(cls.model).filter_by(id=employee_id)
             result_employee = await session.execute(query_employee)
             employee_info = result_employee.scalar_one_or_none()
 
-            # Если студент не найден, возвращаем None
+            # Если работник не найден, возвращаем None
             if not employee_info:
                 return None
 
