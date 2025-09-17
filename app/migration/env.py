@@ -11,8 +11,11 @@ import sys
 from os.path import dirname, abspath
 
 from app.database import DATABASE_URL, Base
-from app.operator.models import Employee, Work, Break, Statistic, StatisticParameter, CoefficientType, Coefficient, Salary
-
+# from app.operator.models import Employee
+# from app.work_time.models import Work, Break
+# from app.statistic.models import Statistic, Parameter
+# from app.salary.models import Salary
+# from app.coefficient.models import Coefficient
 
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
