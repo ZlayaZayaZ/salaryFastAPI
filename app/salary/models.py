@@ -33,3 +33,16 @@ class Salary(Base):
     def __repr__(self):
         return str(self)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "operator_id": self.operator_id,
+            "calculation_date": self.calculation_date,
+            "period_start": self.period_start,
+            "period_end": self.period_end,
+            "total_score": self.total_score,
+            "final_salary": self.final_salary,
+
+            "operator": self.operator
+        }
+
