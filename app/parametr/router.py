@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from app.parametr.dao import ParameterDAO
-from app.parametr.schemas import SParameter
+from app.parametr.schemas import SParameter, SParameterAdd
 from app.parametr.rb import RBParameter
 
 router = APIRouter(prefix='/parameter', tags=['Работа с параметрами'])
@@ -13,9 +13,17 @@ async def get_all_parameters(request_body: RBParameter = Depends()) -> list[SPar
 
 
 @router.get("/{id}", summary="Получить одного работника по id")
-async def get_employee_by_id(parameter_id: int) -> SParameter | dict:
+async def get_parameter_by_id(parameter_id: int) -> SParameter | dict:
     rez = await ParameterDAO.find_full_data(parameter_id)
     if rez is None:
         return {'message': f'Работник с ID {parameter_id} не найден!'}
     return rez
 
+
+@router.post("/add/")
+async def register_parameter(parameter: SParameterAdd) -> dict:
+    check = await ParameterDAO.add(**parameter.dict())
+    if check:
+        return {"message": "Параметр успешно добавлен!", "parameter": parameter}
+    else:
+        return {"message": "Ошибка при добавлении параметра!"}

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.statistic.dao import StatisticDAO
-from app.statistic.schemas import SStatistic
+from app.statistic.schemas import SStatistic, SStatisticAdd
 from app.statistic.rb import RBStatistic
 
 router = APIRouter(prefix='/statistic', tags=['Статистика'])
@@ -43,4 +43,11 @@ async def get_parameter_by_id(parameter_id: int) -> SStatistic | dict:
     return rez
 
 
+@router.post("/add/")
+async def register_statistic(statistic: SStatisticAdd) -> dict:
+    check = await StatisticDAO.add(**statistic.dict())
+    if check:
+        return {"message": "Данные добавлены!", "statistic": statistic}
+    else:
+        return {"message": "Ошибка при добавлении данных!"}
 

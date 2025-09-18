@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.operator.dao import EmployeeDAO
-from app.operator.schemas import SEmployee
+from app.operator.schemas import SEmployee, SEmployeeAdd
 from app.operator.rb import RBEmployee
 
 router = APIRouter(prefix='/employee', tags=['Работа с сотрудниками'])
@@ -19,3 +19,10 @@ async def get_employee_by_id(employee_id: int) -> SEmployee | dict:
     return rez
 
 
+@router.post("/add/")
+async def register_user(employee: SEmployeeAdd) -> dict:
+    check = await EmployeeDAO.add(**employee.dict())
+    if check:
+        return {"message": "Сотрудник успешно добавлен!", "employee": employee}
+    else:
+        return {"message": "Ошибка при добавлении сотрудника!"}

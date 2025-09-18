@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.salary.dao import SalaryDAO
-from app.salary.schemas import SSalary
+from app.salary.schemas import SSalary, SSalaryAdd
 from app.salary.rb import RBSalary
 
 router = APIRouter(prefix='/salary', tags=['Зарплата сотрудников'])
@@ -25,3 +25,12 @@ async def get_operator_by_id(operator_id: int) -> SSalary | dict:
     if rez is None:
         return {'message': f'Данные о зарплате по работнику с ID={operator_id} не найдены!'}
     return rez
+
+
+@router.post("/add/")
+async def register_salary(salary: SSalaryAdd) -> dict:
+    check = await SalaryDAO.add(**salary.dict())
+    if check:
+        return {"message": "Расчет зарплаты за данный период произведен!", "salary": salary}
+    else:
+        return {"message": "Ошибка при добавлении данных!"}

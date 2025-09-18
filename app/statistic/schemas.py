@@ -12,3 +12,11 @@ class SStatistic(BaseModel):
     operator_id: int = Field(..., description="id оператора")
     work_id: int = Field(..., description="id рабочей смены")
 
+
+class SStatisticAdd(BaseModel):
+
+    date: datetime = Field(..., description="Дата события")
+    parameter_id: int = Field(..., description="id параметра")
+    value: int = Field(..., description="Значение параметра")
+    operator_id: int = Field(..., description="id оператора")
+    work_id: int = Field(..., description="id рабочей смены")
