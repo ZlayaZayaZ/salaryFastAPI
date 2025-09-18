@@ -18,6 +18,17 @@ class Work(Base):
     operator: Mapped["Employee"] = relationship("Employee", back_populates="works")
     statistics: Mapped[list["Statistic"]] = relationship("Statistic", back_populates="works")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "operator_id": self.operator_id,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+
+            "operator": self.operator,
+            "statistics": self.statistics,
+        }
+
 
 # модель таблицы перерывов сотрудников
 class Break(Base):
@@ -30,3 +41,12 @@ class Break(Base):
     # Связи
     operator: Mapped["Employee"] = relationship("Employee", back_populates="breaks")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "operator_id": self.operator_id,
+            "start_time": self.start_time,
+            "end_time": self.end_time,
+
+            "operator": self.operator
+        }

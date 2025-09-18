@@ -31,3 +31,16 @@ class Parameter(Base):
     def __repr__(self):
         return str(self)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "norm": self.norm,
+            "base": self.base,
+            "weight": self.weight,
+            "is_positive": self.is_positive,
+
+            "statistics": self.statistics,
+        }
+
