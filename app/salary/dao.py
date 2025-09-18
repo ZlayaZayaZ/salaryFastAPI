@@ -2,9 +2,6 @@ from app.dao.base import BaseDAO
 from app.database import async_session_maker
 from sqlalchemy.future import select
 from app.salary.models import Salary
-from sqlalchemy import insert, update, delete
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import joinedload
 
 
 class SalaryDAO (BaseDAO):
@@ -22,15 +19,6 @@ class SalaryDAO (BaseDAO):
             if not salary_info:
                 return None
 
-            # # Второй запрос для получения информации о специальности
-            # query_major = select(Major).filter_by(id=student_info.major_id)
-            # result_major = await session.execute(query_major)
-            # major_info = result_major.scalar_one()
-            #
-            # student_data = student_info.to_dict()
-            # student_data['major'] = major_info.major_name
-            #
-            # return student_data
             return salary_info
 
     @classmethod

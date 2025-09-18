@@ -2,7 +2,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, DateTime, Float
 from datetime import datetime
 from app.database import Base, int_pk
-from app.operator.models import Employee
+# from app.operator.models import Employee
 
 
 # модель таблицы зарплаты

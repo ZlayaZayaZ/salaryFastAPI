@@ -12,9 +12,9 @@ class WorkDAO (BaseDAO):
     async def find_full_data(cls, operator_id: int):
         async with async_session_maker() as session:
             # Запрос для получения информации о рабочих сменах работника
-            query_work = select(cls.model).filter_by(id=operator_id)
+            query_work = select(cls.model).filter_by(operator_id=operator_id)
             result_work = await session.execute(query_work)
-            work_info = result_work.scalar_one_or_none()
+            work_info = result_work.scalars.all()
 
             # Если рабочие смены у работника не найдены, возвращаем None
             if not work_info:
@@ -39,9 +39,9 @@ class BreakDAO (BaseDAO):
     async def find_full_data(cls, operator_id: int):
         async with async_session_maker() as session:
             # Запрос для получения информации о перерывах работника
-            query_break = select(cls.model).filter_by(id=operator_id)
+            query_break = select(cls.model).filter_by(operator_id=operator_id)
             result_break = await session.execute(query_break)
-            break_info = result_break.scalar_one_or_none()
+            break_info = result_break.scalars.all()
 
             # Если работник не найден, возвращаем None
             if not break_info:

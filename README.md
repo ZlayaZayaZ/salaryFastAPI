@@ -10,6 +10,9 @@ uvicorn app.main:app
 Запуск приложения в режиме отладки:
 uvicorn app.main:app --reload
 
+Запуск приложения на любом удобном порту:
+uvicorn app.main:app --reload --port 8001
+
 Работа с postgres из терминала:
 
 Вход с использованием superuser:

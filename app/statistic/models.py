@@ -2,9 +2,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, DateTime, Integer
 from datetime import datetime
 from app.database import Base, int_pk
-from app.operator.models import Employee
-from app.work_time.models import Work
-from app.parametr.models import Parameter
+# from app.operator.models import Employee
+# from app.work_time.models import Work
+# from app.parametr.models import Parameter
 
 
 # модель таблицы статистики сотрудников
